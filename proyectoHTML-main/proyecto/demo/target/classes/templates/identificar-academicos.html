@@ -171,12 +171,17 @@
             const email = $('#email').val().toLowerCase();
 
             $('#academicosList .list-group-item').each(function(index) {
-                if (index === 0) return;
-                const text = $(this).text().toLowerCase();
+                if (index === 0) return; // Ignorar la fila de encabezados
+
+                const nameText = $(this).find('.col-md-4').eq(0).text().toLowerCase(); // Nombre
+                const emailText = $(this).find('.col-md-4').eq(1).text().toLowerCase(); // Correo
+                const departmentText = $(this).find('.col-md-4').eq(2).text().toLowerCase(); // Departamento
+
                 const matches = 
-                    (name === "" || text.includes(name)) &&
-                    (department === "" || text.includes(department)) &&
-                    (email === "" || text.includes(email));
+                    (name === "" || nameText.includes(name)) &&
+                    (department === "" || departmentText.includes(department)) &&
+                    (email === "" || emailText.includes(email));
+
                 $(this).toggle(matches);
             });
         }
