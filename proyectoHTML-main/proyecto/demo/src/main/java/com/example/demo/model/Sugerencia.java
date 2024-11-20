@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name= "sugerencia")
-public class Sugerencias {
+public class Sugerencia {
     @Column(name = "id_sugerencia")
     private int idSugerencia;
 
