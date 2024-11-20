@@ -42,8 +42,8 @@ public class PoloController {
         return new ResponseEntity<>(nuevoPolo, HttpStatus.CREATED);
     }
 
-    @GetMapping("/dashboard-polo/identificar")
-    public String identificarUsuarios(Model model, HttpSession session) {
+    @GetMapping("/dashboard-polo/identificar-academicos")
+    public String identificarAcademicos(Model model, HttpSession session) {
         String correoUsuario = (String) session.getAttribute("correoUsuario");
         Polo polo = poloService.buscarPorCorreo(correoUsuario); // Verifica que el polo esté autenticado
 
@@ -52,11 +52,25 @@ public class PoloController {
         }
 
         List<Academico> academicos = poloService.obtenerAcademicos();
-        List<Estudiante> estudiantes = poloService.obtenerEstudiantes();
 
         model.addAttribute("academicos", academicos);
+
+        return "identificar-academicos"; // Vista que mostraría la lista
+    }
+
+    @GetMapping("/dashboard-polo/identificar-estudiantes")
+    public String identificarEstudiantes(Model model, HttpSession session) {
+        String correoUsuario = (String) session.getAttribute("correoUsuario");
+        Polo polo = poloService.buscarPorCorreo(correoUsuario); // Verifica que el polo esté autenticado
+
+        if (polo == null) {
+            return "redirect:/login"; // Redirigir si no está autenticado
+        }
+
+        List<Estudiante> estudiantes = poloService.obtenerEstudiantes();
+
         model.addAttribute("estudiantes", estudiantes);
 
-        return "identificar-usuarios"; // Vista que mostraría la lista
+        return "identificar-estudiantes"; // Vista que mostraría la lista
     }
 }
