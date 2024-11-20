@@ -96,16 +96,16 @@
     <div class="container my-5">
         <h2 class="mb-4 text-ubb-blue">Identificar Académicos</h2>
         
-        <form id="filterForm" class="mb- 4">
+        <form id="filterForm" class="mb-4">
             <div class="row">
                 <div class="col-md-3">
                     <input type="text" id="name" class="form-control" placeholder="Filtrar por nombre">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" id="department" class="form-control" placeholder="Filtrar por departamento">
+                    <input type="text" id="email" class="form-control" placeholder="Filtrar por correo">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" id="email" class="form-control" placeholder="Filtrar por correo">
+                    <input type="text" id="department" class="form-control" placeholder="Filtrar por departamento">
                 </div>
             </div>
             <button type="button" class="btn btn-ubb-orange mt-3" onclick="filterAcademics()">Filtrar</button>
@@ -117,8 +117,21 @@
                     <i class="bi bi-people feature-icon mb-3"></i>
                     <h5>Académicos</h5>
                     <ul class="list-group" id="academicosList">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col-md-4"><strong>Nombre</strong></div>
+                                <div class="col-md-4"><strong>Correo</strong></div>
+                                <div class="col-md-4"><strong>Departamento</strong></div>
+                            </div>
+                        </li>
                         <th:block th:each="academico : ${academicos}">
-                            <li class="list-group-item" th:text="${academico.nomAcademico} + ' - ' + ${academico.correoUbb} + ' - ' + ${academico.departamento}"></li>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-md-4" th:text="${academico.nomAcademico}"></div>
+                                    <div class="col-md-4" th:text="${academico.correoUbb}"></div>
+                                    <div class="col-md-4" th:text="${academico.departamento}"></div>
+                                </div>
+                            </li>
                         </th:block>
                     </ul>
                 </div>
@@ -157,7 +170,8 @@
             const department = $('#department').val().toLowerCase();
             const email = $('#email').val().toLowerCase();
 
-            $('#academicosList .list-group-item').each(function() {
+            $('#academicosList .list-group-item').each(function(index) {
+                if (index === 0) return;
                 const text = $(this).text().toLowerCase();
                 const matches = 
                     (name === "" || text.includes(name)) &&
