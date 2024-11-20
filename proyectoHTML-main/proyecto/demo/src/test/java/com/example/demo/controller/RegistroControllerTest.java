@@ -41,6 +41,7 @@ public class RegistroControllerTest {
         MockitoAnnotations.openMocks(this);
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testRegistrarUsuario_RegistroAcademico() {
         // Datos de prueba
@@ -64,6 +65,7 @@ public class RegistroControllerTest {
         verify(academicoService, times(1)).registrarAcademico(any(Academico.class));
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testRegistrarUsuario_RegistroEstudiante() {
         // Datos de prueba
@@ -87,6 +89,7 @@ public class RegistroControllerTest {
         verify(estudianteService, times(1)).registrarEstudiante(any(Estudiante.class));
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testRegistrarUsuario_RegistroPolo() {
         // Datos de prueba
@@ -110,6 +113,7 @@ public class RegistroControllerTest {
         verify(poloService, times(1)).registrarPolo(any(Polo.class));
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testRegistrarUsuario_TestFallido() {
         // Datos de prueba
